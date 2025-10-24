@@ -1,4 +1,4 @@
-    throw new Error("TEsting")
+    
         let cart = [];
         let cartTotal = 0;
 
