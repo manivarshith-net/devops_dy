@@ -1,0 +1,25 @@
+name: Simple Website DevOps
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t simple-website .
+
+      - name: Test Container
+        run: docker run -d -p 8080:80 simple-website && sleep 5 && curl -I http://localhost:8080
+
+      - name: Upload build artifact (optional)
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-files
+          path: .
